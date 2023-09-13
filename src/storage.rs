@@ -1,7 +1,6 @@
 use std::collections::BTreeSet;
 use std::sync::OnceLock;
 
-use boost_rs::rand::string::get_random_alphanumeric_string;
 use log::info;
 use parking_lot::Mutex;
 
@@ -19,11 +18,7 @@ impl StorageHandler {
     }
 
     fn new() -> Self {
-        let mut d = BTreeSet::from(["1".to_string()]);
-
-        for _ in 0..2 {
-            d.insert(get_random_alphanumeric_string(5));
-        }
+        let d = BTreeSet::new();
 
         info!("load data success: {:#?}", d);
 
@@ -63,18 +58,14 @@ mod tests {
     fn test_main() {
         let s = StorageHandler::global();
         s.lock().print();
-        assert_eq!(s.lock().data.len(), 10);
+        assert_eq!(s.lock().data.len(), 0);
 
         s.lock().add("4".to_string());
         s.lock().print();
-        assert_eq!(s.lock().data.len(), 11);
+        assert_eq!(s.lock().data.len(), 1);
 
-        s.lock().remove("1");
+        s.lock().remove("4");
         s.lock().print();
-        assert_eq!(s.lock().data.len(), 10);
-
-        s.lock().remove("5");
-        s.lock().print();
-        assert_eq!(s.lock().data.len(), 10);
+        assert_eq!(s.lock().data.len(), 0);
     }
 }

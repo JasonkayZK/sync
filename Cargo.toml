@@ -25,10 +25,10 @@ tonic = "0.8.3"
 [build-dependencies]
 tonic-build = "0.8.4"
 
-[[bin]]
+[[example]]
 name = "server"
 path = "examples/server.rs"
 
-[[bin]]
+[[example]]
 name = "client"
 path = "examples/client.rs"

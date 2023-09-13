@@ -1,7 +1,7 @@
 use dotenv::dotenv;
 use log::info;
-use sync::api::StorageService;
 use std::env;
+use sync::api::StorageService;
 use tonic::transport::Server;
 
 use sync::logger;
